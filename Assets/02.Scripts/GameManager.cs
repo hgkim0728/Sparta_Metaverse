@@ -41,11 +41,6 @@ public class GameManager : MonoBehaviour
 
         // 미니게임을 더 추가하게 되면 그때 수정
         bestScores[0] = PlayerPrefs.HasKey(flappyBestScoreKey) ? PlayerPrefs.GetInt(flappyBestScoreKey) : 0;
-
-        if(playerInfo.pos != Vector2.zero)
-        {
-            player.LoadPlayerInfo(playerInfo.pos);
-        }
     }
 
     public void PausePlayer()
@@ -55,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     public void SavePlayerInfo(int _miniGameNum)
     {
-        playerInfo.pos = player.transform.position;
+        //playerInfo.pos = player.transform.position;
         SceneManager.LoadScene(_miniGameNum);
     }
 
@@ -63,15 +58,14 @@ public class GameManager : MonoBehaviour
     {
         if(PlayerPrefs.HasKey(flappyBestScoreKey))
         {
-            int bestScore = PlayerPrefs.GetInt(flappyBestScoreKey);
-
-            if(_score < bestScore)
+            if(_score < bestScores[0])
             {
-                return bestScore;
+                return bestScores[0];
             }
         }
 
         PlayerPrefs.SetInt(flappyBestScoreKey, _score);
+        bestScores[0] = _score;
 
         return _score;
     }
@@ -79,5 +73,18 @@ public class GameManager : MonoBehaviour
     public void ReturnMainScene()
     {
         SceneManager.LoadScene("Main");
+        //player.LoadPlayerInfo(playerInfo.pos);
+    }
+
+    public int SendBestScore(int miniGameIdx)
+    {
+        if (PlayerPrefs.HasKey(flappyBestScoreKey))
+        {
+            return bestScores[miniGameIdx - 1];
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

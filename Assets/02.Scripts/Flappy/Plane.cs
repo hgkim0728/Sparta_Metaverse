@@ -20,7 +20,7 @@ public class Plane : MonoBehaviour
 
     void Start()
     {
-        manager = GetComponent<FlappyManager>();
+        manager = FlappyManager.FlappyInstance;
 
         anim = GetComponentInChildren<Animator>();
         rigid = GetComponent<Rigidbody2D>();
@@ -33,10 +33,10 @@ public class Plane : MonoBehaviour
             if (deathCooldown <= 0)
             {
                 // 게임 재시작
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                {
-                    manager.RestartGame();
-                }
+                //if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+                //{
+                //    manager.RestartGame();
+                //}
             }
             else
             {

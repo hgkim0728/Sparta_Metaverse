@@ -12,7 +12,7 @@ public class FlappyUIManager : MonoBehaviour
     public void SetRestart(int _bestScore)
     {
         gameOverPanel.SetActive(true);
-        resultText.text = "BestScore" + _bestScore.ToString();
+        resultText.text = "BestScore : " + _bestScore.ToString();
     }
 
     public void UpdateScore(int score)

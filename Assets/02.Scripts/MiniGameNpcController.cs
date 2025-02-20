@@ -28,12 +28,14 @@ public class MiniGameNpcController : MonoBehaviour
 
     private void SetMiniGamePanel()
     {
-        gameManager.PausePlayer();
         miniGamePanel.SetActive(true);
+        if (miniGamePanel.activeSelf == false) return;
+        gameManager.PausePlayer();
         // 시작 버튼에 미니게임 시작 함수 연결해주기
+        miniGamePanel.transform.GetChild(0).Find("StartBtn").GetComponent<Button>().onClick.AddListener(LoadMiniGameScene);
         miniGamePanel.transform.GetChild(0).Find("ExitBtn").GetComponent<Button>().onClick.AddListener(SleepPanel);
-        miniGamePanel.SetActive(false);
         // 미니 게임 정보를 받아와 최고 점수 표시
+        textBestScore.text = gameManager.SendBestScore(miniGameNum).ToString();
     }
 
     private void SleepPanel()
