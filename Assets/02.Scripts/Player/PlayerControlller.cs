@@ -7,12 +7,17 @@ public class PlayerControlller : MonoBehaviour
     private Rigidbody2D rigid;
     private Animator anim;
 
+    private GameManager gameManager;
+
     [SerializeField] private float moveSpeed = 5f;
 
     private Vector2 moveDir = Vector2.zero;
+    public Vector2 MoveDir
+    {
+        get { return moveDir; }
+    }
 
     private bool isPlay = true;
-    public bool IsPlay { set { isPlay = value; } }
 
     private readonly int MoveX = Animator.StringToHash("MoveX");
     private readonly int MoveY = Animator.StringToHash("MoveY");
@@ -26,8 +31,6 @@ public class PlayerControlller : MonoBehaviour
 
     void Update()
     {
-        if (!isPlay) return;
-
         PlayerMove();
     }
 
@@ -37,19 +40,29 @@ public class PlayerControlller : MonoBehaviour
         float dirY = Input.GetAxisRaw("Vertical");
         moveDir = new Vector2(dirX, dirY);
 
-        if (dirX != 0 || dirY != 0)
-        {
-            anim.SetBool(IsMove, true);
-            rigid.velocity = moveDir.normalized * moveSpeed;
-        }
-        else
+        if (!isPlay || (dirX == 0 && dirY == 0))
         {
             anim.SetBool(IsMove, false);
             rigid.velocity = Vector2.zero;
             return;
         }
+        else
+        {
+            anim.SetBool(IsMove, true);
+            rigid.velocity = moveDir.normalized * moveSpeed;
+        }
 
         anim.SetFloat(MoveX, dirX);
         anim.SetFloat(MoveY, dirY);
+    }
+
+    public void ChangeIsPlay()
+    {
+        isPlay = !isPlay;
+    }
+
+    public void LoadPlayerInfo(Vector2 _pos)
+    {
+        transform.position = _pos;
     }
 }
