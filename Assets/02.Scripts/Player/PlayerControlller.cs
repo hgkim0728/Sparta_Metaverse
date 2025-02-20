@@ -11,6 +11,9 @@ public class PlayerControlller : MonoBehaviour
 
     private Vector2 moveDir = Vector2.zero;
 
+    private bool isPlay = true;
+    public bool IsPlay { set { isPlay = value; } }
+
     private readonly int MoveX = Animator.StringToHash("MoveX");
     private readonly int MoveY = Animator.StringToHash("MoveY");
     private readonly int IsMove = Animator.StringToHash("IsMove");
@@ -23,11 +26,8 @@ public class PlayerControlller : MonoBehaviour
 
     void Update()
     {
-        
-    }
+        if (!isPlay) return;
 
-    void FixedUpdate()
-    {
         PlayerMove();
     }
 
