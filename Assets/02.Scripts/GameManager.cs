@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour
     {
         //playerInfo.pos = player.transform.position;
         SceneManager.LoadScene(_miniGameNum);
+        Time.timeScale = 0;
     }
 
     public int UpdateBestScore(int _score)
@@ -86,5 +87,10 @@ public class GameManager : MonoBehaviour
         {
             return 0;
         }
+    }
+
+    public void MiniGameStart()
+    {
+        Time.timeScale = 1;
     }
 }

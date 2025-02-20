@@ -30,15 +30,7 @@ public class Plane : MonoBehaviour
     {
         if (isDead)
         {
-            if (deathCooldown <= 0)
-            {
-                // 게임 재시작
-                //if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
-                //{
-                //    manager.RestartGame();
-                //}
-            }
-            else
+            if (deathCooldown > 0)
             {
                 deathCooldown -= Time.deltaTime;
             }
