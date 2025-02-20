@@ -40,7 +40,7 @@ public class PlayerControlller : MonoBehaviour
         if (dirX != 0 || dirY != 0)
         {
             anim.SetBool(IsMove, true);
-            rigid.velocity = moveDir * moveSpeed;
+            rigid.velocity = moveDir.normalized * moveSpeed;
         }
         else
         {
