@@ -58,4 +58,26 @@ public class GameManager : MonoBehaviour
         playerInfo.pos = player.transform.position;
         SceneManager.LoadScene(_miniGameNum);
     }
+
+    public int UpdateBestScore(int _score)
+    {
+        if(PlayerPrefs.HasKey(flappyBestScoreKey))
+        {
+            int bestScore = PlayerPrefs.GetInt(flappyBestScoreKey);
+
+            if(_score < bestScore)
+            {
+                return bestScore;
+            }
+        }
+
+        PlayerPrefs.SetInt(flappyBestScoreKey, _score);
+
+        return _score;
+    }
+
+    public void ReturnMainScene()
+    {
+        SceneManager.LoadScene("Main");
+    }
 }
